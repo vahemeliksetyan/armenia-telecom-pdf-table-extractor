@@ -37,14 +37,21 @@ Operating revenues, billion AMD:
 | `Արժեք` | The reported number |
 | `Measurement unit` | e.g. *thousand AMD*, *subscribers*, *AMD* |
 
-Amounts are in **thousand AMD**, exactly as reported — nothing is corrected or restated.
+Amounts are in **thousand AMD**. Values are stored as positive magnitudes (so expenses
+chart as positive numbers); only profit before tax, non-operating result, FX gains/losses,
+other operating result, financial income and other non-operating income/expenses keep
+their sign (`SIGN_MATTERS` in [`src/extraction/report_processor.py`](src/extraction/report_processor.py)).
+A few values the reports leave empty are calculated by the pipeline: Ucom 9.1, 9.2, 9.5
+and 9.6 (sums of their sub-items; 9.2 is subscriber-weighted ARPU) and Viva 1 (copied from 1.1).
 The last rows add employee and branch counts (2025 Q4), collected by hand from the
 operators' websites ([`data/external/`](data/external/)).
 
 ## Data quality
 
 Every value in the final file is checked against the text of its source PDF
-([`src/validate.py`](src/validate.py)): all 3,553 reported values are found in the PDFs.
+([`src/validate.py`](src/validate.py)). Of 3,553 values, 3,007 are found on their own line,
+428 elsewhere in the PDF, 17 by digits only and 41 as a weak match (small number not on its
+line); 60 are calculated by the pipeline and 0 are not found.
 The same step flags spikes, level shifts and broken identities in the operators' own
 reports — see [`data/final/anomaly_report.md`](data/final/anomaly_report.md).
 
