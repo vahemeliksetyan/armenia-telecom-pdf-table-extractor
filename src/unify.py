@@ -74,7 +74,6 @@ def run(extractor=config.DEFAULT_EXTRACTOR):
         df = pd.read_excel(filepath)
         df = unify_column(df, company, maps, LABEL_COL)
         df["company"] = company
-        df["source_file"] = filepath.name
         dfs.append(df)
 
     final_df = pd.concat(dfs, ignore_index=True)

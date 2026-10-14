@@ -438,7 +438,7 @@ def write_text_report(df, summary, anomalies, consistency, match, sources, extra
 def run(extractor=config.DEFAULT_EXTRACTOR):
     df = pd.read_excel(config.final_file(extractor))
     df = df[df["company"].isin(config.OPERATORS) & (df["Ինդեքս"].astype(str) != "EMP")]
-    df = df[df["source_file"].astype(str).str.contains("_combined")]   # PDF rows only
+    df = df[df["source_file"].astype(str).str.lower().str.endswith(".pdf")]   # PDF rows only
 
     print("Checking source PDFs ...")
     sources = check_sources()
