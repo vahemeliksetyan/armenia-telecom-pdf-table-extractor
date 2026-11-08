@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "armenia-telecom-pdf-table-extractor"
+version = "1.0.0"
+description = "Extract tables from PDF reports into Excel/CSV with Python (pdfplumber + Camelot): multi-page tables, repeated headers, (1,234) negatives, decimal commas, and a check of every number against the PDF."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Vahe Meliksetyan" }]
+requires-python = ">=3.9"
+dependencies = ["pandas>=1.5", "openpyxl>=3.1", "pdfplumber>=0.11"]
+keywords = ["pdf", "pdf table extraction", "pdfplumber", "camelot", "pdf to excel", "pdf to csv",
+            "financial reports", "data extraction", "pandas", "telecom", "armenia"]
+
+[project.optional-dependencies]
+camelot = ["camelot-py>=0.11", "opencv-python-headless>=4.8", "PyPDF2>=3.0"]
+dev = ["pytest>=7"]
+
+[project.scripts]
+pdftables = "pdftables.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/vahemeliksetyan/armenia-telecom-pdf-table-extractor"
+
+[tool.setuptools]
+packages = ["pdftables"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

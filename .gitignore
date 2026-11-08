@@ -18,3 +18,7 @@ data/final/comparison_camelot_vs_plumber.xlsx
 
 # Visualisation is kept locally, not published
 visualization/
+
+# Packaging
+*.egg-info/
+.pytest_cache/
